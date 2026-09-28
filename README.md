@@ -22,6 +22,10 @@ The project uses two main types of data sources.
    - Channel
    - Merchant
    - Event timestamp
+  
+## Data Model
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/619b100a-35f0-4d74-8d12-93a3bc190e3f" />
+
 ## Key Services
 
 - Cloud SQL
