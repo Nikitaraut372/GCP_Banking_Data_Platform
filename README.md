@@ -91,3 +91,7 @@ GCS → Dataproc / PySpark → CDC Deduplication → BigQuery Bronze → Audit L
 
 ## PySpark code file
 - [Bronze_Ingestion_PySpark_Code](bronze_gcs_to_bq.py)
+
+## Dataflow ingestion pipeline 2 (Streaming Ingestion)
+<img width="1747" height="694" alt="image" src="https://github.com/user-attachments/assets/28021591-426b-4cd2-bd19-a96234a405b8" />
+
