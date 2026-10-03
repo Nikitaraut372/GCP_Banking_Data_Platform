@@ -71,3 +71,23 @@ Built a metadata-driven framework to configure and manage data ingestion pipelin
 
 <img width="943" height="448" alt="image" src="https://github.com/user-attachments/assets/3097ed80-2224-466a-8b47-aca5f307dfe6" />
 
+- [Batch_Ingestion_Python_Code](cloudsql_cdc_pipeline.py)
+
+## Bronze Ingestion Layer
+
+The Bronze layer uses **Dataproc with PySpark** to ingest Parquet data from **GCS into BigQuery**. The pipeline is **metadata-driven**, using source paths, primary keys, and watermark columns from the `table_ingestion_config` metadata table. It applies predefined schemas and **CDC-aware deduplication** to retain the latest record for each primary key, adds a technical `bronze_load_ts` column, and writes the data to BigQuery Bronze tables. Each table is processed independently, with execution details captured in an audit table.
+
+**Flow:**
+
+```text
+GCS → Dataproc / PySpark → CDC Deduplication → BigQuery Bronze → Audit Log
+```
+
+**Technologies:** Dataproc, PySpark, GCS, BigQuery
+
+
+## Bronze Ingestion Audit Log
+<img width="1907" height="512" alt="image" src="https://github.com/user-attachments/assets/a81d2921-f8fb-4a5e-9076-d7af37c27cf4" />
+
+## PySpark code file
+- [Bronze_Ingestion_PySpark_Code](bronze_gcs_to_bq.py)
