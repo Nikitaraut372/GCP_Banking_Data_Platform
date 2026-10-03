@@ -95,3 +95,74 @@ GCS → Dataproc / PySpark → CDC Deduplication → BigQuery Bronze → Audit L
 ## Dataflow ingestion pipeline 2 (Streaming Ingestion)
 <img width="1747" height="694" alt="image" src="https://github.com/user-attachments/assets/28021591-426b-4cd2-bd19-a96234a405b8" />
 
+## Data Processing & Medallion Architecture
+
+After CDC ingestion, the data is landed in the **GCS Raw layer** in Parquet format. The raw data is then processed using **Dataproc with PySpark** and loaded into the BigQuery Bronze layer.
+
+### Processing Flow
+
+```text
+Cloud SQL
+    ↓
+Dataflow
+    ↓
+GCS Raw / Landing
+    ↓
+Dataproc + PySpark
+    ↓
+BigQuery Bronze
+    ↓
+BigQuery Silver
+    ↓
+BigQuery Gold
+    ↓
+BI / Reporting
+```
+
+### Bronze Layer
+
+The Bronze layer preserves the source data with **minimal technical processing**. PySpark applies the required schema, performs basic technical validation, adds ingestion metadata, and handles CDC-aware deduplication where required.
+
+The objective of the Bronze layer is to retain a reliable and traceable representation of the ingested source data without applying major business transformations.
+
+### Silver Layer
+
+Processing includes:
+
+* Data cleaning and null handling
+* Data type standardization
+* Data-quality validation
+* Deduplication
+* Joins and enrichment
+* Business transformations
+* Dimension and fact modelling
+* SCD Type 2 processing for applicable dimensions
+
+The Silver layer provides trusted, analytics-ready data for downstream consumption.
+
+### Gold Layer
+
+The Gold layer contains **business-ready and reporting-oriented datasets**.
+
+Processing includes:
+
+* Aggregations
+* Business KPIs
+* Summary tables
+* Reporting datasets
+* Analytical views
+
+These datasets are consumed by BI and reporting tools.
+
+### Processing Responsibilities
+
+| Component              | Responsibility                                                      |
+| ---------------------- | ------------------------------------------------------------------- |
+| **Dataflow**           | CDC-based ingestion from Cloud SQL to GCS                           |
+| **GCS Raw**            | Landing and preservation of ingested Parquet data                   |
+| **Dataproc + PySpark** | Technical processing, cleaning, standardization and transformations |
+| **BigQuery Bronze**    | Source-aligned, minimally processed data                            |
+| **BigQuery Silver**    | Cleaned, standardized and business-transformed data                 |
+| **BigQuery Gold**      | Aggregated and reporting-ready data                                 |
+| **Airflow**            | Orchestration and scheduling of pipeline tasks                      |
+
