@@ -140,29 +140,57 @@ Processing includes:
 
 The Silver layer provides trusted, analytics-ready data for downstream consumption.
 
-### Gold Layer
+### Gold Layer – Business & Reporting Data
 
-The Gold layer contains **business-ready and reporting-oriented datasets**.
+The Gold layer contains **business-ready and reporting-oriented datasets** created from the processed Silver layer. These tables apply business rules and aggregations to support analytics and BI reporting.
 
-Processing includes:
+### Gold Tables
 
-* Aggregations
-* Business KPIs
-* Summary tables
-* Reporting datasets
-* Analytical views
+| Gold Table                  | Purpose                                                                     |
+| --------------------------- | --------------------------------------------------------------------------- |
+| `customer_360`              | Customer-level view combining customer, account and transaction information |
+| `daily_account_balance`     | Daily snapshot of current account balances                                  |
+| `daily_transaction_summary` | Daily transaction count and transaction amount by channel                   |
+| `fraud_indicators`          | Identifies high-value transactions based on a defined transaction threshold |
 
-These datasets are consumed by BI and reporting tools.
+<img width="334" height="82" alt="image" src="https://github.com/user-attachments/assets/5d179570-aa17-4a97-b8ad-9d5c1eb9b1e3" />
 
-### Processing Responsibilities
 
-| Component              | Responsibility                                                      |
-| ---------------------- | ------------------------------------------------------------------- |
-| **Dataflow**           | CDC-based ingestion from Cloud SQL to GCS                           |
-| **GCS Raw**            | Landing and preservation of ingested Parquet data                   |
-| **Dataproc + PySpark** | Technical processing, cleaning, standardization and transformations |
-| **BigQuery Bronze**    | Source-aligned, minimally processed data                            |
-| **BigQuery Silver**    | Cleaned, standardized and business-transformed data                 |
-| **BigQuery Gold**      | Aggregated and reporting-ready data                                 |
-| **Airflow**            | Orchestration and scheduling of pipeline tasks                      |
+### Gold Processing
+
+```text
+Silver
+  ├── dim_customer
+  ├── dim_account
+  └── fact_transactions
+          ↓
+       Gold SQL
+          ↓
+  ┌─────────────────────────────┐
+  │ customer_360                │
+  │ daily_account_balance       │
+  │ daily_transaction_summary   │
+  │ fraud_indicators            │
+  └─────────────────────────────┘
+          ↓
+     Looker / BI
+```
+
+### Example Gold Table
+
+**Customer 360**
+
+The `customer_360` table provides a consolidated customer-level view with metrics such as total accounts, total balance, KYC status, and last transaction timestamp.
+
+<img width="706" height="326" alt="image" src="https://github.com/user-attachments/assets/40640260-1752-47e1-baad-afc28e0c035d" />
+
+
+### Gold Analytics
+
+The Gold layer is designed for downstream BI consumption and can be connected to Looker to create dashboards for:
+
+* Customer 360 analysis
+* Account balance trends
+* Transaction volume and amount by channel
+* High-value transaction monitoring
 
