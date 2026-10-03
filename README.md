@@ -62,4 +62,7 @@ The project uses two main types of data sources.
 - Pipeline orchestration using Airflow
 - CI/CD deployment using Cloud Build and GitHub
 
+## Dataflow ingestion pipeline 1 (Batch Ingestion)
+
+<img width="943" height="448" alt="image" src="https://github.com/user-attachments/assets/3097ed80-2224-466a-8b47-aca5f307dfe6" />
 
