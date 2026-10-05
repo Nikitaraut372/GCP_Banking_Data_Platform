@@ -40,7 +40,7 @@ The project uses two main types of data sources.
 - Cloud Scheduler
 - Cloud Build
 - Looker / Power BI
-- Medallion Architecture (Bronze, Silver, Gold)
+
 
 ## Key Techniques involved
 
