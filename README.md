@@ -194,3 +194,12 @@ The Gold layer is designed for downstream BI consumption and can be connected to
 * Transaction volume and amount by channel
 * High-value transaction monitoring
 
+## Banking Dashboard
+
+The banking overview dashboard was created using Looker Studio (Google Data Studio) and connected to the processed banking data in BigQuery
+
+<img width="918" height="646" alt="image" src="https://github.com/user-attachments/assets/18bb5111-447e-413a-936a-9a7aca61a0fe" />
+<img width="574" height="335" alt="image" src="https://github.com/user-attachments/assets/54e92ff9-0f93-4864-b98b-ec32b679e5ab" />
+<img width="570" height="329" alt="image" src="https://github.com/user-attachments/assets/e286a84d-636f-4bd8-afda-ca01b4f474ee" />
+
+<img width="590" height="390" alt="image" src="https://github.com/user-attachments/assets/f516fcd3-2016-419f-a4db-3a91dcf20a8b" />
