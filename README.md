@@ -206,4 +206,7 @@ The banking overview dashboard was created using Looker Studio (Google Data Stud
 
 ## Orchestration using Cloud Composer
 <img width="959" height="452" alt="image" src="https://github.com/user-attachments/assets/7c974f19-d1f4-4f83-ab86-1dc802315b30" />
+<img width="959" height="452" alt="image" src="https://github.com/user-attachments/assets/48d60302-90c9-44b3-b78d-7ac464c40c2f" />
+
+
 
